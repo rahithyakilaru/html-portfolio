@@ -1,56 +1,12 @@
-var drum_click = document.querySelectorAll(".drum");
+var quotes = [{qt:"The only way to do great work is to love what you do.",author:"Steve Jobs"}, 
+    {qt:"The mind is everything. What you think you become.",author: "Buddha"}, 
+    {qt:"The best way to predict the future is to create it." ,author:"Abraham Lincoln"},
+    {qt:"A journey of a thousand miles begins with a single step." , author:"Lao Tzu" },
+    {qt:"The greatest glory in living lies not in never falling, but in rising every time we fall.", author: "Nelson Mandela"}];
 
-for (i=0; i<drum_click.length;i++){
-    drum_click[i].addEventListener("click",function(){
-        var buttonInnerHTML = this.innerHTML;
-        makesound(buttonInnerHTML);
-        buttonAnimation(buttonInnerHTML);
-        
-    })
+function getQuotes(){
+    var rndmqt= Math.floor(Math.random()*quotes.length);
+    document.querySelector(".text").innerHTML= quotes[rndmqt].qt; 
+    document.querySelector(".author").innerHTML = "- " + quotes[rndmqt].author;
 }
-document.addEventListener("keydown", function(event){
-    makesound(event.key);
-    buttonAnimation(event.key);
-})
-function makesound(key){
-    switch (key) {
-        case "w":
-            var audio = new Audio("sounds/tom-1.mp3");
-            audio.play();
-            break;
-        case "a":
-            var audio = new Audio("sounds/tom-2.mp3");
-            audio.play();
-            break;
-            case "s":
-            var audio = new Audio("sounds/tom-3.mp3");
-            audio.play();
-            break;
-            case "d":
-            var audio = new Audio("sounds/tom-4.mp3");
-            audio.play();
-            break;
-            case "j":
-            var audio = new Audio("sounds/snare.mp3");
-            audio.play();
-            break;
-            case "k":
-            var audio = new Audio("sounds/crash.mp3");
-            audio.play();
-            break;
-            case "l":
-            var audio = new Audio("sounds/kick-bass.mp3");
-            audio.play();
-            break;
-    
-        default:
-            break;
-    }
-}
-function buttonAnimation(event){
-    var animationKey= document.querySelector("."+event);
-    animationKey.classList.add("pressed");
-    setTimeout(function(){
-        animationKey.classList.remove("pressed");
-    },100);
-}
+document.querySelector(".btn").addEventListener("click",getQuotes);
